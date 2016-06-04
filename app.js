@@ -1,9 +1,14 @@
-// Our Twitter library
-var Twit = require('twit');
-// We need to include our configuration file
-var T = new Twit(require('./config.js'));
+var app = require('express')();
+var server = require('http').Server(app);
+// var Twit = require('twit');
+// var T = new Twit(require('./config.js'));
+// var stream = T.stream('statuses/filter', { track: ['nyc'] })
 
-var stream = T.stream('statuses/filter', { track: ['nyc'] })
-stream.on('tweet', function (tweet) {
-  eval(require('locus'))
+app.get('/', function(req, res) {
+	res.sendFile(__dirname + "/views/index.html");
+
 })
+// stream.on('tweet', function (tweet) {
+//   eval(require('locus'))
+// })
+server.listen(3000);
