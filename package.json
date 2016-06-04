@@ -1,0 +1,17 @@
+{
+  "name": "itp-camp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4",
+    "locus": "^1.2.0",
+    "nodemon": "^1.9.2",
+    "twit": "^2.2.4"
+  }
+}
