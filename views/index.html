@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -30,17 +29,31 @@
       var map;
       var lastTweet;
       var socket = io.connect('http://localhost:3000');
-
-      socket.on('tweet', function (data) {
-        document.getElementById('tweet').innerHTML = data.tweet.text
-        if (data.tweet.coordinates) {
-          debugger;
-        };
-
-
-      });
-
-
+    socket.on('tweet', function (data) {
+      document.getElementById('tweet').innerHTML = data.tweet.text
+      if (data.tweet.coordinates) {
+        lastTweet = data.tweet;
+        var latLng = {lat: data.tweet.coordinates.coordinates[1], lng: data.tweet.coordinates.coordinates[0]}
+        
+        map.setCenter(latLng);
+        map.setZoom(14);
+        console.log(data.tweet.coordinates.coordinates[0]);
+      
+        
+        var marker = new google.maps.Marker({
+            position: latLng,
+            map: map,
+            title: data.tweet.user.name
+        });
+        var infowindow = new google.maps.InfoWindow({
+            content: data.tweet.text
+          });
+          marker.addListener('click', function() {
+            infowindow.open(map, marker);
+          });
+        
+      };
+    });
     function init() {
       map = new google.maps.Map(document.getElementById('map'), {
         zoom: 4,
@@ -48,8 +61,7 @@
       });
     }
     </script>
-    
-
+  
 
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsYKGxW1tT39r89OGt_FGND4J07eHLGOw&callback=init"></script>
