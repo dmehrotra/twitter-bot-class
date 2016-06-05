@@ -1,14 +1,21 @@
 var app = require('express')();
 var server = require('http').Server(app);
-// var Twit = require('twit');
-// var T = new Twit(require('./config.js'));
-// var stream = T.stream('statuses/filter', { track: ['nyc'] })
+
+var io = require('socket.io')(server); 
+
+var Twit = require('twit');
+var T = new Twit(require('./config.js'));
+var stream = T.stream('statuses/filter', { track: ['nyc'] })
 
 app.get('/', function(req, res) {
+	io.on('connection', function (socket) { 
+		stream.on('tweet', function (tweet) {
+	  		console.log(tweet)
+	  		socket.emit('tweet', { tweet: tweet });
+		})
+	})
 	res.sendFile(__dirname + "/views/index.html");
 
 })
-// stream.on('tweet', function (tweet) {
-//   eval(require('locus'))
-// })
+
 server.listen(3000);
