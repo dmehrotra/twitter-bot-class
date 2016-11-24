@@ -1,8 +1,3 @@
-# itp-camp
-
-https://www.npmjs.com/package/twit
-
-https://developers.google.com/maps/documentation/javascript/
-
+# Twitter Bot Session : Dhruv Mehrotra Spring 2016
 
 This is the repository for a class on twitter bots that i taught at ITP
